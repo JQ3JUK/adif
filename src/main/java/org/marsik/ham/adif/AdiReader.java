@@ -354,6 +354,8 @@ public class AdiReader {
             } else if ("created_timestamp".equalsIgnoreCase(parsedTag.getName())) {
                 header.setTimestamp(
                         LocalDateTime.parse(value, DateTimeFormatter.ofPattern("yyyyMMdd HHmmss")).atZone(ZoneId.of("UTC")));
+            } else {
+                header.extras.put(parsedTag.getName(), value);
             }
         }
 

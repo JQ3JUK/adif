@@ -96,7 +96,7 @@ public class AdiReaderTest {
     @Test
     public void testReadHeader() throws Exception {
         AdiReader reader = new AdiReader();
-        BufferedReader inputReader = mockInput(" #treafa<created_timestamp:15>20170216 224815<eoH>");
+        BufferedReader inputReader = mockInput(" #treafa<created_timestamp:15>20170216 224815\n<USERDEF:7>userdef<eoH>");
         AdifHeader header = reader.readHeader(inputReader);
 
         assertThat(header)
@@ -104,6 +104,9 @@ public class AdiReaderTest {
 
         assertThat(header.getTimestamp())
                 .isEqualTo(ZonedDateTime.of(2017, 2, 16, 22, 48, 15, 0, ZoneId.of("UTC")));
+
+        assertThat(header.extras).isNotNull();
+        assertThat(header.extras.get("USERDEF")).isEqualTo("userdef");
     }
 
     @Test
@@ -120,6 +123,12 @@ public class AdiReaderTest {
         Optional<Adif3> adif = reader.read(inputReader);
         assertThat(adif.get().header.version).isEqualTo("3.0.4");
         assertThat(adif.get().header.programId).isEqualTo("monolog");
+
+        assertThat(adif.get().header.extras).isNotNull();
+        assertThat(adif.get().header.extras.get("USERDEF1")).isEqualTo("EPC");
+        assertThat(adif.get().header.extras.get("USERDEF2")).isEqualTo("SweaterSize,{S,M,L}");
+        assertThat(adif.get().header.extras.get("USERDEF3")).isEqualTo("ShoeSize,{5:20}");
+
         assertThat(adif.get().records)
                 .isNotNull()
                 .hasSize(3);
