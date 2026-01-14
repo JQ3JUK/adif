@@ -1,6 +1,8 @@
 package org.marsik.ham.adif;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.Data;
 import lombok.Getter;
@@ -14,4 +16,6 @@ public class AdifHeader {
     String programId;
     String programVersion;
     ZonedDateTime timestamp;
+
+    Map<String, String> extras = new HashMap<>();
 }
