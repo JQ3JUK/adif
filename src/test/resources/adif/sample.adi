@@ -42,4 +42,6 @@ City, ST 12345
 <submode:9>JT9H FAST
 <app_monolog_compression:3>off
 <tx_pwr:3>100
+<USERDEF1:8>USERDEF1
+<APP_MONOLOG_QSO_TIMESTAMP:20>2026-01-13T05:20:00Z // QSO Date & Time; ISO-8601
 <eor>

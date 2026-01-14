@@ -157,6 +157,8 @@ public class AdiReaderTest {
         assertThat(adif.get().records.get(2).getMode()).isEqualTo(JT9);
         assertThat(adif.get().records.get(2).getSubmode()).isEqualTo(JT9H_FAST.adifCode());
         assertThat(adif.get().records.get(2).getTxPwr()).isEqualTo(100.0);
+        assertThat(adif.get().records.get(2).getUserFields().get("USERDEF1")).isEqualTo("USERDEF1");
+        assertThat(adif.get().records.get(2).getAppFields().get("APP_MONOLOG_QSO_TIMESTAMP")).isEqualTo("2026-01-13T05:20:00Z");
     }
 
     @Test(expected = IllegalArgumentException.class)
