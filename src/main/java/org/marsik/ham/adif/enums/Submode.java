@@ -15,6 +15,7 @@ public enum Submode implements AdifEnumCode {
     FSK31("FSK31", Mode.PSK),
     FSKHELL("FSKHELL", Mode.HELL),
     FSQCALL("FSQCALL", Mode.MFSK),
+    FST4("FST4", Mode.MFSK),
     FT4("FT4", Mode.MFSK),
     GTOR("GTOR", Mode.TOR),
     HELL80("HELL80", Mode.HELL),
