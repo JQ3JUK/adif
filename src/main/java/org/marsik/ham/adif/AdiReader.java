@@ -62,13 +62,13 @@ public class AdiReader {
             if (recordFields == null) {
                 break;
             }
-            document.getRecords().add(parseRecord(recordFields));
+            document.getRecords().add(parseRecord(recordFields, document.getHeader().getProgramId()));
         }
 
         return Optional.of(document);
     }
 
-    private Adif3Record parseRecord(Map<String, String> recordFields) {
+    private Adif3Record parseRecord(Map<String, String> recordFields, String programId) {
         Adif3Record record = new Adif3Record();
 
         maybeGet(recordFields, "ADDRESS").map(Function.identity()).ifPresent(record::setAddress);
@@ -253,6 +253,13 @@ public class AdiReader {
                 .map(s -> parseCommaArray(s, String::valueOf))
                 .ifPresent(record::setVuccGrids);
         maybeGet(recordFields, "WEB").map(Function.identity()).ifPresent(record::setWeb);
+
+        record.setAppFields(recordFields.entrySet().stream()
+                .filter(e -> e.getKey().startsWith("APP_" + programId.toUpperCase() + "_"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        record.setUserFields(recordFields.entrySet().stream()
+                .filter(e -> e.getKey().matches("USERDEF\\d+"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
         return record;
     }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.gavaghan.geodesy.GlobalCoordinates;
 import org.marsik.ham.adif.enums.AntPath;
@@ -822,4 +823,7 @@ public class Adif3Record {
     private String web;
 
     // todo app specific fields, user defined fields
+
+    private Map<String, String> appFields;
+    private Map<String, String> userFields;
 }
