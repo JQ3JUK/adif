@@ -34,8 +34,8 @@ public enum Band implements AdifEnumCode {
     BAND_1_25cm("1.25cm", 24000, 24250),
     BAND_6mm("6mm", 47000, 47200),
     BAND_4mm("4mm", 75500, 81000),
-    BAND_2_5mm("2.5mm", 119980, 120020),
-    BAND_2mm("2mm", 142000, 149000),
+    BAND_2_5mm("2.5mm", 119980, 123000),
+    BAND_2mm("2mm", 134000, 149000),
     BAND_1mm("1mm", 241000, 250000);
 
     private final String code;
