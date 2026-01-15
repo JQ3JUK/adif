@@ -377,6 +377,12 @@ public class Adif3Record {
     private String myAntennaIntl;
 
     /**
+     * the logging station's ARRL section
+     * TODO enum
+     */
+    private String myArrlSect;
+
+    /**
      * the logging station's city
      */
     private String myCity;
@@ -505,6 +511,12 @@ public class Adif3Record {
      * todo maidenhead
      */
     private List<String> myVuccGrids;
+
+    /**
+     *the logging station's WWFF Reference
+     * TODO WwffRef type
+     */
+    private String myWwffRef;
 
     /**
      * the contacted station's operator's name
@@ -821,6 +833,12 @@ public class Adif3Record {
      * the contacted station's URL
      */
     private String web;
+
+    /**
+     * the contacted station's WWFF Reference
+     * TODO WwffRef type
+     */
+    private String wwffRef;
 
     // todo app specific fields, user defined fields
 

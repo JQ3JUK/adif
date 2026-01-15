@@ -154,6 +154,7 @@ public class AdiReader {
         }
         maybeGet(recordFields, "MS_SHOWER").map(Function.identity()).ifPresent(record::setMsShower);
         maybeGet(recordFields, "MY_ANTENNA").map(Function.identity()).ifPresent(record::setMyAntenna);
+        maybeGet(recordFields, "MY_ARRL_SECT").map(Function.identity()).ifPresent(record::setMyArrlSect);
         maybeGet(recordFields, "MY_CITY").map(Function.identity()).ifPresent(record::setMyCity);
         maybeGet(recordFields, "MY_CNTY").map(Function.identity()).ifPresent(record::setMyCnty);
         maybeGet(recordFields, "MY_COUNTRY").map(Function.identity()).ifPresent(record::setMyCountry);
@@ -183,6 +184,7 @@ public class AdiReader {
         maybeGet(recordFields, "MY_VUCC_GRIDS")
                 .map(s -> parseCommaArray(s, String::valueOf))
                 .ifPresent(record::setMyVuccGrids);
+        maybeGet(recordFields, "MY_WWFF_REF").map(Function.identity()).ifPresent(record::setMyWwffRef);
         maybeGet(recordFields, "NAME").map(Function.identity()).ifPresent(record::setName);
         maybeGet(recordFields, "NOTES").map(Function.identity()).ifPresent(record::setNotes);
         maybeGet(recordFields, "NR_BURSTS").map(Integer::parseInt).ifPresent(record::setNrBursts);
@@ -253,6 +255,7 @@ public class AdiReader {
                 .map(s -> parseCommaArray(s, String::valueOf))
                 .ifPresent(record::setVuccGrids);
         maybeGet(recordFields, "WEB").map(Function.identity()).ifPresent(record::setWeb);
+        maybeGet(recordFields, "WWFF_REF").map(Function.identity()).ifPresent(record::setWwffRef);
 
         record.setAppFields(recordFields.entrySet().stream()
                 .filter(e -> e.getKey().startsWith("APP_" + programId.toUpperCase() + "_"))
