@@ -43,6 +43,7 @@ public class AdiReader {
 
     public Optional<Adif3> read(BufferedReader reader) throws IOException {
         Adif3 document = new Adif3();
+        String programId = "";
 
         reader.mark(1);
         int c = reader.read();
@@ -52,6 +53,7 @@ public class AdiReader {
         } else if (c != '<') {
             AdifHeader header = readHeader(reader);
             document.setHeader(header);
+            programId = header.getProgramId();
         } else {
             // No header
             reader.reset();
@@ -62,7 +64,7 @@ public class AdiReader {
             if (recordFields == null) {
                 break;
             }
-            document.getRecords().add(parseRecord(recordFields, document.getHeader().getProgramId()));
+            document.getRecords().add(parseRecord(recordFields, programId));
         }
 
         return Optional.of(document);

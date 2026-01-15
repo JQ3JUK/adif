@@ -26,7 +26,7 @@ public class AdiWriterTest {
         writer.append(record);
 
         assertThat(writer.toString())
-                .isEqualTo("<CALL:7>OK7MS/p<EOR>");
+                .isEqualTo("<CALL:7>OK7MS/p<EOR>\n");
     }
 
     @Test
@@ -39,6 +39,6 @@ public class AdiWriterTest {
         writer.append(record);
 
         assertThat(writer.toString())
-                .isEqualTo("<CALL:7>OK7MS/p<TIME_ON:6>153000<EOR>");
+                .isEqualTo("<CALL:7>OK7MS/p<TIME_ON:6>153000<EOR>\n");
     }
 }
