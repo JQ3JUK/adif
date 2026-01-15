@@ -146,6 +146,12 @@ public class Adif3Record {
     private String cnty;
 
     /**
+     * a semicolon (;) delimited, unordered list of Secondary Administrative Subdivision Alt codes for the contacted station.
+     * TODO enum(?)
+     */
+    private List<String> cntyAlt;
+
+    /**
      * comment field for QSO (ASCII)
      */
     private String comment;
@@ -206,6 +212,24 @@ public class Adif3Record {
      * the contacted station's DARC DOK (District Location Code)
      */
     private String darcDok;
+
+    /**
+     * date QSL received from DCL
+     */
+    private ZonedDateTime dclQslRDate;
+    /**
+     * date QSL sent to DCL
+     */
+    private ZonedDateTime dclQslSDate;
+
+    /**
+     * DCL QSL received status
+     */
+    private QslRcvd dclQslRcvd;
+    /**
+     * DCL QSL sent status
+     */
+    private QslSent dclQslSent;
 
     /**
      * the distance between the logging station and the contacted station in kilometers via the specified signal path
@@ -395,6 +419,16 @@ public class Adif3Record {
     private Mode mode;
 
     /**
+     * details of the contacted station's Morse key
+     */
+    private String morseKeyInfo;
+    /**
+     * the contacted station's Morse key type
+     * TODO enum
+     */
+    private String morseKeyType;
+
+    /**
      * For Meteor Scatter QSOs, the name of the meteor shower in progress
      */
     private String msShower;
@@ -432,6 +466,11 @@ public class Adif3Record {
     private String myCnty;
 
     /**
+     * a semicolon (;) delimited, unordered list of Secondary Administrative Subdivision Alt codes for the logging station
+     */
+    private List<String> myCntyAlt;
+
+    /**
      * the logging station's DXCC entity name
      */
     private String myCountry;
@@ -441,6 +480,12 @@ public class Adif3Record {
      * the logging station's CQ Zone
      */
     private Integer myCqZone;
+
+    /**
+     * the logging station's DARC DOK (District Location Code)
+     * todo enum
+     */
+    private String myDarcDok;
 
     /**
      * the logging station's Country Code
@@ -484,6 +529,16 @@ public class Adif3Record {
      * the logging station's latitude
      */
     private GlobalCoordinates myCoordinates;
+
+    /**
+     *details of the logging station's Morse key
+     */
+    private String myMorseKeyInfo;
+    /**
+     * the logging station's Morse key type
+     * tody enum
+     */
+    private String myMorseKeyType;
 
     /**
      * the logging operator's name
@@ -625,20 +680,33 @@ public class Adif3Record {
     private String publicKey;
 
     /**
+     * date QSO downloaded from QRZ.COM logbook
+     */
+    private ZonedDateTime qrzcomQsoDownloadDate;
+    /**
+     * QRZ.COM logbook QSO download status
+     */
+    private QsoUploadStatus qrzcomQsoDownloadStatus;
+
+    /**
      * the date the QSO was last uploaded to the QRZ.COM online service
      */
     private ZonedDateTime qrzcomQsoUploadDate;
-
     /**
      * the upload status of the QSO on the QRZ.COM online service
      */
     private QsoUploadStatus qrzcomQsoUploadStatus;
 
     /**
-     * QSL card message
+     * a message for the contacted station's operator to be incorporated in a paper or electronic QSL
      */
     private String qslMsg;
     private String qslMsgIntl;
+
+    /**
+     * a message addressed to the logging station's operator incorporated in a paper or electronic QSL
+     */
+    private String qslMsgRcvd;
 
     /**
      * QSL received date

@@ -97,6 +97,9 @@ public class AdiReader {
                 .map(QsoUploadStatus::findByCode)
                 .ifPresent(record::setClublogQsoUploadStatus);
         maybeGet(recordFields, "CNTY").map(Function.identity()).ifPresent(record::setCnty);
+        maybeGet(recordFields, "CNTY_ALT")
+                .map(s -> parseSemicolonArray(s, String::valueOf))
+                .ifPresent(record::setCntyAlt);
         maybeGet(recordFields, "COMMENT").map(Function.identity()).ifPresent(record::setComment);
         maybeGet(recordFields, "CONT").map(Continent::findByCode).ifPresent(record::setCont);
         maybeGet(recordFields, "CONTACTED_OP").map(Function.identity()).ifPresent(record::setContactedOp);
@@ -110,6 +113,10 @@ public class AdiReader {
                 .map(s -> parseCommaArray(s, String::valueOf))
                 .ifPresent(record::setCreditGranted);
         maybeGet(recordFields, "DARC_DOK").map(Function.identity()).ifPresent(record::setDarcDok);
+        maybeGet(recordFields, "DCL_QSLRDATE").map(this::parseDate).ifPresent(record::setDclQslRDate);
+        maybeGet(recordFields, "DCL_QSLSDATE").map(this::parseDate).ifPresent(record::setDclQslSDate);
+        maybeGet(recordFields, "DCL_QSL_RCVD").map(QslRcvd::findByCode).ifPresent(record::setDclQslRcvd);
+        maybeGet(recordFields, "DCL_QSL_SENT").map(QslSent::findByCode).ifPresent(record::setDclQslSent);
         maybeGet(recordFields, "DISTANCE").map(Double::parseDouble).ifPresent(record::setDistance);
         maybeGet(recordFields, "DXCC").map(Integer::parseInt).ifPresent(record::setDxcc);
         maybeGet(recordFields, "EMAIL").map(Function.identity()).ifPresent(record::setEmail);
@@ -166,14 +173,20 @@ public class AdiReader {
                 throw e;
             }
         }
+        maybeGet(recordFields, "MORSE_KEY_INFO").map(Function.identity()).ifPresent(record::setMorseKeyInfo);
+        maybeGet(recordFields, "MORSE_KEY_TYPE").map(Function.identity()).ifPresent(record::setMorseKeyType);
         maybeGet(recordFields, "MS_SHOWER").map(Function.identity()).ifPresent(record::setMsShower);
         maybeGet(recordFields, "MS_ALTITUDE").map(Double::parseDouble).ifPresent(record::setMyAltitude);
         maybeGet(recordFields, "MY_ANTENNA").map(Function.identity()).ifPresent(record::setMyAntenna);
         maybeGet(recordFields, "MY_ARRL_SECT").map(Function.identity()).ifPresent(record::setMyArrlSect);
         maybeGet(recordFields, "MY_CITY").map(Function.identity()).ifPresent(record::setMyCity);
         maybeGet(recordFields, "MY_CNTY").map(Function.identity()).ifPresent(record::setMyCnty);
+        maybeGet(recordFields, "MY_CNTY_ALT")
+                .map(s -> parseSemicolonArray(s, String::valueOf))
+                .ifPresent(record::setMyCntyAlt);
         maybeGet(recordFields, "MY_COUNTRY").map(Function.identity()).ifPresent(record::setMyCountry);
         maybeGet(recordFields, "MY_CQ_ZONE").map(Integer::parseInt).ifPresent(record::setMyCqZone);
+        maybeGet(recordFields, "MY_DARC_DOK").map(Function.identity()).ifPresent(record::setMyDarcDok);
         maybeGet(recordFields, "MY_DXCC").map(Integer::parseInt).ifPresent(record::setMyDxcc);
         maybeGet(recordFields, "MY_FISTS").map(Function.identity()).ifPresent(record::setMyFists);
         maybeGet(recordFields, "MY_GRIDSQUARE").map(Function.identity()).ifPresent(record::setMyGridSquare);
@@ -186,6 +199,8 @@ public class AdiReader {
         Optional<Double> myLon = maybeGet(recordFields, "MY_LON").map(CoordinateWriter::dmToLon);
         MultiOptional.two(myLat, myLon, GlobalCoordinates::new).ifPresent(record::setMyCoordinates);
 
+        maybeGet(recordFields, "MY_MORSE_KEY_INFO").map(Function.identity()).ifPresent(record::setMyMorseKeyInfo);
+        maybeGet(recordFields, "MY_MORSE_KEY_TYPE").map(Function.identity()).ifPresent(record::setMyMorseKeyType);
         maybeGet(recordFields, "MY_NAME").map(Function.identity()).ifPresent(record::setMyName);
         maybeGet(recordFields, "MY_POSTAL_CODE").map(Function.identity()).ifPresent(record::setMyPostalCode);
         maybeGet(recordFields, "MY_POTA_REF")
@@ -217,6 +232,12 @@ public class AdiReader {
         maybeGet(recordFields, "PRECEDENCE").map(Function.identity()).ifPresent(record::setPrecedence);
         maybeGet(recordFields, "PROP_MODE").map(Propagation::findByCode).ifPresent(record::setPropMode);
         maybeGet(recordFields, "PUBLIC_KEY").map(Function.identity()).ifPresent(record::setPublicKey);
+        maybeGet(recordFields, "QRZCOM_QSO_DOWNLOAD_DATE")
+                .map(this::parseDate)
+                .ifPresent(record::setQrzcomQsoDownloadDate);
+        maybeGet(recordFields, "QRZCOM_QSO_DOWNLOAD_STATUS")
+                .map(QsoUploadStatus::findByCode)
+                .ifPresent(record::setQrzcomQsoDownloadStatus);
         maybeGet(recordFields, "QRZCOM_QSO_UPLOAD_DATE")
                 .map(this::parseDate)
                 .ifPresent(record::setQrzcomQsoUploadDate);
@@ -224,6 +245,8 @@ public class AdiReader {
                 .map(QsoUploadStatus::findByCode)
                 .ifPresent(record::setQrzcomQsoUploadStatus);
         maybeGet(recordFields, "QSLMSG").map(Function.identity()).ifPresent(record::setQslMsg);
+        maybeGet(recordFields, "QSLMSG_INTL").map(Function.identity()).ifPresent(record::setQslMsgIntl);
+        maybeGet(recordFields, "QSLMSG_RCVD").map(Function.identity()).ifPresent(record::setQslMsgRcvd);
         maybeGet(recordFields, "QSLRDATE").map(this::parseLocalDate).ifPresent(record::setQslRDate);
         maybeGet(recordFields, "QSLSDATE").map(this::parseLocalDate).ifPresent(record::setQslSDate);
         maybeGet(recordFields, "QSL_RCVD").map(QslRcvd::findByCode).ifPresent(record::setQslRcvd);
@@ -443,6 +466,12 @@ public class AdiReader {
 
     private <T> List<T> parseColonArray(String s, Function<String, T> fieldConverter) {
         return Stream.of(s.split(":"))
+                .map(fieldConverter)
+                .collect(Collectors.toList());
+    }
+
+    private <T> List<T> parseSemicolonArray(String s, Function<String, T> fieldConverter) {
+        return Stream.of(s.split(";"))
                 .map(fieldConverter)
                 .collect(Collectors.toList());
     }
