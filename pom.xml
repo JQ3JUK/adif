@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.marsik.ham</groupId>
+    <groupId>cards.eqsl</groupId>
     <artifactId>adif</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2.0-fork.1</version>
     <packaging>jar</packaging>
 
     <name>ADIF library</name>
