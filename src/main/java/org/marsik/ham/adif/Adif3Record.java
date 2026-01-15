@@ -252,6 +252,12 @@ public class Adif3Record {
     private String eqCall;
 
     /**
+     * indicates whether the QSO is known to be "Authenticity Guaranteed" by eQSL
+     * todo enum
+     */
+    private String eqslAg;
+
+    /**
      * date QSL received from eQSL.cc
      * (only valid if EQSL_QSL_RCVD is Y, I, or V)
      * (V deprecated)
