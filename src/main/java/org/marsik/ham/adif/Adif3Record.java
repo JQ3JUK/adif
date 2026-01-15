@@ -605,6 +605,7 @@ public class Adif3Record {
 
     /**
      * a comma-delimited list of one or more of the contacted station's POTA (Parks on the Air) reference(s).
+     * todo PotaRef type
      */
     private List<String> potaRef;
 
