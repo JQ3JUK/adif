@@ -602,7 +602,7 @@ public class Adif3Record {
     private List<String> myUsaCaCounties;
 
     /**
-     * two or four adjacent Maidenhead grid locators, each four characters long, representing the logging
+     * two or four adjacent Maidenhead grid locators, each four or six characters long, representing the logging
      * station's grid squares that the contacted station may claim for the ARRL VUCC award program.
      *
      * E.g.
@@ -938,7 +938,7 @@ public class Adif3Record {
     // veProv - alias to state
 
     /**
-     * two or four adjacent Maidenhead grid locators, each four characters long, representing the contacted station's
+     * two or four adjacent Maidenhead grid locators, each four or six characters long, representing the contacted station's
      * grid squares credited to the QSO for the ARRL VUCC award program.
      *
      * E.g.
