@@ -36,7 +36,8 @@ public enum Band implements AdifEnumCode {
     BAND_4mm("4mm", 75500, 81000),
     BAND_2_5mm("2.5mm", 119980, 123000),
     BAND_2mm("2mm", 134000, 149000),
-    BAND_1mm("1mm", 241000, 250000);
+    BAND_1mm("1mm", 241000, 250000),
+    BAND_submm("submm", 300000, 7500000);
 
     private final String code;
     private final double lowerFrequency;
