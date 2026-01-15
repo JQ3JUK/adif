@@ -121,6 +121,7 @@ public class AdiReader {
         maybeGet(recordFields, "DXCC").map(Integer::parseInt).ifPresent(record::setDxcc);
         maybeGet(recordFields, "EMAIL").map(Function.identity()).ifPresent(record::setEmail);
         maybeGet(recordFields, "EQ_CALL").map(Function.identity()).ifPresent(record::setEqCall);
+        maybeGet(recordFields, "EQSL_AG").map(Function.identity()).ifPresent(record::setEqslAg);
         maybeGet(recordFields, "EQSL_QSLRDATE").map(this::parseDate).ifPresent(record::setEqslQslRDate);
         maybeGet(recordFields, "EQSL_QSLSDATE").map(this::parseDate).ifPresent(record::setEqslQslSDate);
         maybeGet(recordFields, "EQSL_QSL_RCVD").map(QslRcvd::findByCode).ifPresent(record::setEqslQslRcvd);
