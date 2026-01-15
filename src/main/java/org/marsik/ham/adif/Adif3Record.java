@@ -46,6 +46,11 @@ public class Adif3Record {
     private Integer age;
 
     /**
+     * the height of the contacted station in meters
+     */
+    private Double altitude;
+
+    /**
      * the geomagnetic A index at the time of the QSO
      */
     private Double aIndex;
@@ -286,7 +291,31 @@ public class Adif3Record {
      */
     private String gridsquare;
 
+    /**
+     * for a contacted station's 10-character or 12-character Maidenhead locator
+     * todo maidenhead/coordinate type
+     */
+    private String gridsquareExt;
+
     // todo guest_op alias for operator
+
+    /**
+     * the date the QSO was last uploaded to the HAMLOG.EU online service
+     */
+    private ZonedDateTime hamLogEuQsoUploadDate;
+    /**
+     * the upload status of the QSO on the HAMLOG.EU online service
+     */
+    private QsoUploadStatus hamLogEuQsoUploadStatus;
+
+    /**
+     * the date the QSO was last uploaded to the HamQTH.com online service
+     */
+    private ZonedDateTime hamQthQsoUploadDate;
+    /**
+     * the upload status of the QSO on the HamQTH.com online service
+     */
+    private QsoUploadStatus hamQthQsoUploadStatus;
 
     /**
      * the date the QSO was last uploaded to the HRDLog.net online service
@@ -371,6 +400,11 @@ public class Adif3Record {
     private String msShower;
 
     /**
+     * the height of the logging station in meters
+     */
+    private Double myAltitude;
+
+    /**
      * the logging station's antenna
      */
     private String myAntenna;
@@ -424,6 +458,10 @@ public class Adif3Record {
      * the logging station's 2-character, 4-character, 6-character, or 8-character Maidenhead Grid Square
      */
     private String myGridSquare;
+    /**
+     * for a logging station's 10-character or 12-character Maidenhead locator
+     */
+    private String myGridsquareExt;
 
     /**
      * the logging station's IOTA designator, in format CC-XXX, where
@@ -458,6 +496,12 @@ public class Adif3Record {
      */
     private String myPostalCode;
     private String getMyPostalCodeIntl;
+
+    /**
+     * a comma-delimited list of one or more of the logging station's POTA (Parks on the Air) reference(s).
+     * todo PotaRef type
+     */
+    private List<String> myPotaRef;
 
     /**
      * description of the logging station's equipment
@@ -558,6 +602,11 @@ public class Adif3Record {
      * the contacted station's WPX prefix
      */
     private String pfx;
+
+    /**
+     * a comma-delimited list of one or more of the contacted station's POTA (Parks on the Air) reference(s).
+     */
+    private List<String> potaRef;
 
     /**
      * contest precedence (e.g. for ARRL Sweepstakes)

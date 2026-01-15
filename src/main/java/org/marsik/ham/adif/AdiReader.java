@@ -73,6 +73,7 @@ public class AdiReader {
 
         maybeGet(recordFields, "ADDRESS").map(Function.identity()).ifPresent(record::setAddress);
         maybeGet(recordFields, "AGE").map(Integer::parseInt).ifPresent(record::setAge);
+        maybeGet(recordFields, "ALTITUDE").map(Double::parseDouble).ifPresent(record::setAltitude);
         maybeGet(recordFields, "A_INDEX").map(Double::parseDouble).ifPresent(record::setAIndex);
         maybeGet(recordFields, "ANT_AZ").map(Double::parseDouble).ifPresent(record::setAntAz);
         maybeGet(recordFields, "ANT_EL").map(Double::parseDouble).ifPresent(record::setAntEl);
@@ -123,6 +124,19 @@ public class AdiReader {
         maybeGet(recordFields, "FREQ").map(Double::parseDouble).ifPresent(record::setFreq);
         maybeGet(recordFields, "FREQ_RX").map(Double::parseDouble).ifPresent(record::setFreqRx);
         maybeGet(recordFields, "GRIDSQUARE").map(Function.identity()).ifPresent(record::setGridsquare);
+        maybeGet(recordFields, "GRIDSQUARE_EXT").map(Function.identity()).ifPresent(record::setGridsquareExt);
+        maybeGet(recordFields, "HAMLOGEU_QSO_UPLOAD_DATE")
+                .map(this::parseDate)
+                .ifPresent(record::setHamLogEuQsoUploadDate);
+        maybeGet(recordFields, "HAMLOGEU_QSO_UPLOAD_STATUS")
+                .map(QsoUploadStatus::findByCode)
+                .ifPresent(record::setHamLogEuQsoUploadStatus);
+        maybeGet(recordFields, "HAMQTH_QSO_UPLOAD_DATE")
+                .map(this::parseDate)
+                .ifPresent(record::setHamQthQsoUploadDate);
+        maybeGet(recordFields, "HAMQTH_QSO_UPLOAD_STATUS")
+                .map(QsoUploadStatus::findByCode)
+                .ifPresent(record::setHamQthQsoUploadStatus);
         maybeGet(recordFields, "HRDLOG_QSO_UPLOAD_DATE")
                 .map(this::parseDate)
                 .ifPresent(record::setHrdlogQsoUploadDate);
@@ -153,6 +167,7 @@ public class AdiReader {
             }
         }
         maybeGet(recordFields, "MS_SHOWER").map(Function.identity()).ifPresent(record::setMsShower);
+        maybeGet(recordFields, "MS_ALTITUDE").map(Double::parseDouble).ifPresent(record::setMyAltitude);
         maybeGet(recordFields, "MY_ANTENNA").map(Function.identity()).ifPresent(record::setMyAntenna);
         maybeGet(recordFields, "MY_ARRL_SECT").map(Function.identity()).ifPresent(record::setMyArrlSect);
         maybeGet(recordFields, "MY_CITY").map(Function.identity()).ifPresent(record::setMyCity);
@@ -162,6 +177,7 @@ public class AdiReader {
         maybeGet(recordFields, "MY_DXCC").map(Integer::parseInt).ifPresent(record::setMyDxcc);
         maybeGet(recordFields, "MY_FISTS").map(Function.identity()).ifPresent(record::setMyFists);
         maybeGet(recordFields, "MY_GRIDSQUARE").map(Function.identity()).ifPresent(record::setMyGridSquare);
+        maybeGet(recordFields, "MY_GRIDSQUARE_EXT").map(Function.identity()).ifPresent(record::setMyGridsquareExt);
         maybeGet(recordFields, "MY_IOTA").map(Iota::findByCode).ifPresent(record::setMyIota);
         maybeGet(recordFields, "MY_IOTA_ISLAND_ID").map(Function.identity()).ifPresent(record::setMyIotaIslandId);
         maybeGet(recordFields, "MY_ITU_ZONE").map(Integer::parseInt).ifPresent(record::setMyItuZone);
@@ -172,6 +188,9 @@ public class AdiReader {
 
         maybeGet(recordFields, "MY_NAME").map(Function.identity()).ifPresent(record::setMyName);
         maybeGet(recordFields, "MY_POSTAL_CODE").map(Function.identity()).ifPresent(record::setMyPostalCode);
+        maybeGet(recordFields, "MY_POTA_REF")
+                .map(s -> parseCommaArray(s, String::valueOf))
+                .ifPresent(record::setMyPotaRef);
         maybeGet(recordFields, "MY_RIG").map(Function.identity()).ifPresent(record::setMyRig);
         maybeGet(recordFields, "MY_SIG").map(Function.identity()).ifPresent(record::setMySig);
         maybeGet(recordFields, "MY_SIG_INFO").map(Function.identity()).ifPresent(record::setMySigInfo);
@@ -192,6 +211,9 @@ public class AdiReader {
         maybeGet(recordFields, "OPERATOR").map(Function.identity()).ifPresent(record::setOperator);
         maybeGet(recordFields, "OWNER_CALLSIGN").map(Function.identity()).ifPresent(record::setOwnerCallsign);
         maybeGet(recordFields, "PFX").map(Function.identity()).ifPresent(record::setPfx);
+        maybeGet(recordFields, "POTA_REF")
+                .map(s -> parseCommaArray(s, String::valueOf))
+                .ifPresent(record::setPotaRef);
         maybeGet(recordFields, "PRECEDENCE").map(Function.identity()).ifPresent(record::setPrecedence);
         maybeGet(recordFields, "PROP_MODE").map(Propagation::findByCode).ifPresent(record::setPropMode);
         maybeGet(recordFields, "PUBLIC_KEY").map(Function.identity()).ifPresent(record::setPublicKey);
