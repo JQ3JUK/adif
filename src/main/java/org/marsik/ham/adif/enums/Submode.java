@@ -18,8 +18,10 @@ public enum Submode implements AdifEnumCode {
     _8PSK1200F("8PSK1200F", Mode.PSK),
     AMTORFEC("AMTORFEC", Mode.TOR),
     ASCI("ASCI", Mode.RTTY),
+    C4FM("C4FM", Mode.DIGITALVOICE),
     CHIP64("CHIP64", Mode.CHIP),
     CHIP128("CHIP128", Mode.CHIP),
+    DMR("DMR", Mode.DIGITALVOICE),
     DOM_M("DOM-M", Mode.DOMINO),
     DOM4("DOM4", Mode.DOMINO),
     DOM5("DOM5", Mode.DOMINO),
@@ -31,6 +33,7 @@ public enum Submode implements AdifEnumCode {
     DOM88("DOM88", Mode.DOMINO),
     DOMINOEX("DOMINOEX", Mode.DOMINO),
     DOMINOF("DOMINOF", Mode.DOMINO),
+    DSTAR("DSTAR", Mode.DIGITALVOICE),
     FMHELL("FMHELL", Mode.HELL),
     FSK31("FSK31", Mode.PSK),
     FSKHELL("FSKHELL", Mode.HELL),
@@ -171,7 +174,11 @@ public enum Submode implements AdifEnumCode {
     THROB1("THROB1", Mode.THRB),
     THROB2("THROB2", Mode.THRB),
     THROB4("THROB4", Mode.THRB),
-    USB("USB", Mode.SSB);
+    USB("USB", Mode.SSB),
+    VARA_HF("VARA HF", Mode.DYNAMIC),
+    VARA_SATELLITE("VARA SATELLITE", Mode.DYNAMIC),
+    VARA_FM_1200("VARA FM 1200", Mode.DYNAMIC),
+    VARA_FM_9600("VARA FM 9600", Mode.DYNAMIC);
 
     private final String code;
     private final Mode mode;
