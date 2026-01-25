@@ -413,7 +413,7 @@ public class AdiReader {
                 header.setTimestamp(
                         LocalDateTime.parse(value, DateTimeFormatter.ofPattern("yyyyMMdd HHmmss")).atZone(ZoneId.of("UTC")));
             } else {
-                header.extras.put(parsedTag.getName(), value);
+                header.extras.put(parsedTag.getName().toUpperCase(), value);
             }
         }
 
