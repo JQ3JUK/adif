@@ -6,7 +6,7 @@
 
     <groupId>cards.eqsl</groupId>
     <artifactId>adif</artifactId>
-    <version>1.2.0-fork.1</version>
+    <version>1.2.0-fork.2</version>
     <packaging>jar</packaging>
 
     <name>ADIF library</name>
